@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://mdms-backend.vercel.app/';
+const API_URL = 'https://mdms-backend.vercel.app';
 
 export const register = async (userData) => {
   try {
