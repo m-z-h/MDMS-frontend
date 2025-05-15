@@ -115,9 +115,7 @@ function NurseDashboard() {
       {success && <p className="text-green-500 mb-4">{success}</p>}
       {pdfUrl && (
         <p className="text-blue-500 mb-4">
-          <a href={`http://localhost:5000${pdfUrl}`} download className="underline">
-            Download Patient PDF
-          </a>
+                    <a href={`${API_ENDPOINTS.patient}${pdfUrl}`} download className="underline">            Download Patient PDF          </a>
         </p>
       )}
       <div className="bg-white p-6 rounded shadow-md mb-6">

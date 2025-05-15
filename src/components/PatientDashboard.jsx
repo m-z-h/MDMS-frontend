@@ -51,14 +51,7 @@ function PatientDashboard() {
 
   const handleDownloadPDF = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/patient/pdf/${patientDetails._id}`,
-        {
-          headers: { 
-            Authorization: `Bearer ${localStorage.getItem('token')}` 
-          },
-          responseType: 'blob'
-        }
+            const response = await axios.get(        `${API_ENDPOINTS.patient}/pdf/${patientDetails._id}`,        {          headers: {             Authorization: `Bearer ${localStorage.getItem('token')}`           },          responseType: 'blob'        }
       );
       
       const blob = new Blob([response.data], { type: 'application/pdf' });
