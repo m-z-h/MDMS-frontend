@@ -1,11 +1,9 @@
 import axios from 'axios';
 import { API_ENDPOINTS } from '../config/api';
 
-const API_URL = API_ENDPOINTS.auth;
-
 export const register = async (userData) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, userData);
+    const response = await axios.post(`${API_ENDPOINTS.auth}/register`, userData);
     return response.data;
   } catch (error) {
     throw error.response?.data?.message || 'Registration failed';
@@ -14,7 +12,7 @@ export const register = async (userData) => {
 
 export const login = async (credentials) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, credentials);
+    const response = await axios.post(`${API_ENDPOINTS.auth}/login`, credentials);
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('user', JSON.stringify(response.data.user));
     return response.data;
@@ -27,7 +25,7 @@ export const logout = async () => {
   try {
     const token = localStorage.getItem('token');
     await axios.post(
-      `${API_URL}/logout`,
+      `${API_ENDPOINTS.auth}/logout`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -41,7 +39,7 @@ export const logout = async () => {
 export const getCurrentUser = async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.get(`${API_URL}/me`, {
+    const response = await axios.get(`${API_ENDPOINTS.auth}/me`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
