@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 function PatientDashboard() {
   const { user, logoutUser } = useContext(AuthContext);
@@ -19,14 +20,14 @@ function PatientDashboard() {
 
       try {
         // First get patient details using email
-        const patientRes = await axios.get(`http://localhost:5000/api/patient/by-email/${user.email}`, {
+        const patientRes = await axios.get(`${API_ENDPOINTS.patient}/by-email/${user.email}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setPatientDetails(patientRes.data);
 
         // Then fetch medical records using the patient ID from the response
         if (patientRes.data._id) {
-          const recordsRes = await axios.get(`http://localhost:5000/api/medical-record/patient/${patientRes.data._id}`, {
+          const recordsRes = await axios.get(`${API_ENDPOINTS.medicalRecord}/patient/${patientRes.data._id}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
           });
           setRecords(recordsRes.data);
